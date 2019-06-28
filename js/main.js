@@ -7,17 +7,48 @@ var lista = document.getElementById("lista"),
 //Funciones
 var agregarTarea = function(){
 
-  alert("Agregar tarea");
+  var tarea = tareaInput.value,
+  nuevaTarea = document.createElement("li"),
+  enlace = document.createElement("a")
+  contenido = document.createTextNode(tarea);
+
+  if(tarea === ""){
+    tareaInput.setAttribute("placeholder","Agrega una tarea valida");
+    tareaInput.className = "error";
+    return false;
+  }
+  //agregamos contenido al enlace
+  enlace.appendChild(contenido);
+  //le establcemos un atributo href
+  enlace.setAttribute("href", "#");
+  //Agregamos el enlace (a) a la nueva tarea (li)
+  nuevaTarea.appendChild(enlace);
+  lista.appendChild(nuevaTarea);
+
+  tareaInput.value = "";
+
+  for (var i = 0; i <= lista.children.length -1; i++) {
+    lista.children[i].addEventListener("click", function(){
+      this.parentNode.removeChild(this);
+    });
+  }
+
+
+  console.log("Agregar tarea");
 
 };
 var comprobarInput = function(){
+  tareaInput.className = "";
+  tareaInput.setAttribute("placeholder", "Agrega tu tarea");
 
-  alert("Comprobar input");
+  console.log("Comprobar input");
 
 };
 var eliminarTarea = function(){
 
-  alert("Eliminar tarea");
+  this.parentNode.removeChild(this);
+
+  console.log("Eliminar tarea");
 
 };
 
